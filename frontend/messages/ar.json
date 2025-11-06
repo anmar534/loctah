@@ -1,0 +1,79 @@
+{
+  "common": {
+    "appName": "لوكتاه",
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "categories": "التصنيفات",
+    "stores": "المتاجر",
+    "favorites": "المفضلة",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "dashboard": "لوحة التحكم",
+    "admin": "الإدارة",
+    "search": "بحث",
+    "filter": "تصفية",
+    "sort": "ترتيب",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "add": "إضافة",
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجح"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "categories": "التصنيفات",
+    "stores": "المتاجر",
+    "myFavorites": "مفضلاتي",
+    "myDashboard": "لوحة التحكم",
+    "adminPanel": "لوحة الإدارة"
+  },
+  "auth": {
+    "loginTitle": "تسجيل الدخول إلى حسابك",
+    "registerTitle": "إنشاء حساب جديد",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "name": "الاسم الكامل",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "noAccount": "ليس لديك حساب؟",
+    "hasAccount": "لديك حساب بالفعل؟",
+    "signIn": "تسجيل الدخول",
+    "signUp": "إنشاء حساب"
+  },
+  "products": {
+    "title": "المنتجات",
+    "allProducts": "جميع المنتجات",
+    "productDetails": "تفاصيل المنتج",
+    "addToFavorites": "إضافة للمفضلة",
+    "removeFromFavorites": "إزالة من المفضلة",
+    "comparePrice": "مقارنة الأسعار",
+    "brand": "العلامة التجارية",
+    "category": "التصنيف",
+    "description": "الوصف",
+    "availableAt": "متوفر في",
+    "bestPrice": "أفضل سعر",
+    "save": "وفّر",
+    "notFound": "المنتج غير موجود"
+  },
+  "stores": {
+    "title": "المتاجر",
+    "allStores": "جميع المتاجر",
+    "storeDetails": "تفاصيل المتجر",
+    "location": "الموقع",
+    "phone": "الهاتف",
+    "address": "العنوان",
+    "city": "المدينة",
+    "viewOnMap": "عرض على الخريطة",
+    "offers": "العروض"
+  },
+  "favorites": {
+    "title": "مفضلاتي",
+    "empty": "لا توجد مفضلات بعد",
+    "addProducts": "ابدأ بإضافة منتجاتك المفضلة"
+  }
+}

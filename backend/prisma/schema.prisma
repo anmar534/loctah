@@ -1,0 +1,155 @@
+// Prisma schema for Loctah Platform - MVP Simplified Version
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==================== USERS ====================
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(USER)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  favorites Favorite[]
+  store     Store?
+
+  @@index([email])
+  @@map("users")
+}
+
+enum Role {
+  USER
+  VENDOR
+  ADMIN
+}
+
+// ==================== CATEGORIES ====================
+
+model Category {
+  id          String   @id @default(uuid())
+  nameAr      String
+  nameEn      String
+  slug        String   @unique
+  parentId    String?
+  imageUrl    String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id], onDelete: Cascade)
+  children Category[] @relation("CategoryTree")
+  products Product[]
+
+  @@index([parentId])
+  @@index([slug])
+  @@map("categories")
+}
+
+// ==================== PRODUCTS ====================
+
+model Product {
+  id          String   @id @default(uuid())
+  nameAr      String
+  nameEn      String
+  descriptionAr String? @db.Text
+  descriptionEn String? @db.Text
+  sku         String   @unique
+  slug        String   @unique
+  brand       String?
+  categoryId  String
+  images      String[] // URLs array
+  status      ProductStatus @default(ACTIVE)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  category  Category   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  offers    Offer[]
+  favorites Favorite[]
+
+  @@index([categoryId])
+  @@index([status])
+  @@index([slug])
+  @@map("products")
+}
+
+enum ProductStatus {
+  ACTIVE
+  INACTIVE
+}
+
+// ==================== STORES ====================
+
+model Store {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  name        String
+  slug        String   @unique
+  phone       String
+  address     String
+  city        String
+  latitude    Float
+  longitude   Float
+  logoUrl     String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  offers Offer[]
+
+  @@index([userId])
+  @@index([city])
+  @@index([slug])
+  @@map("stores")
+}
+
+// ==================== OFFERS ====================
+
+model Offer {
+  id              String   @id @default(uuid())
+  productId       String
+  storeId         String
+  originalPrice   Decimal  @db.Decimal(10, 2)
+  discountedPrice Decimal  @db.Decimal(10, 2)
+  discountPercent Int      // Calculated: ((original - discounted) / original) * 100
+  isActive        Boolean  @default(true)
+  validUntil      DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  store   Store   @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, storeId])
+  @@index([productId])
+  @@index([storeId])
+  @@index([isActive])
+  @@map("offers")
+}
+
+// ==================== FAVORITES ====================
+
+model Favorite {
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@id([userId, productId])
+  @@index([userId])
+  @@index([productId])
+  @@map("favorites")
+}

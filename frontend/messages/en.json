@@ -1,0 +1,79 @@
+{
+  "common": {
+    "appName": "Loctah",
+    "home": "Home",
+    "products": "Products",
+    "categories": "Categories",
+    "stores": "Stores",
+    "favorites": "Favorites",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "categories": "Categories",
+    "stores": "Stores",
+    "myFavorites": "My Favorites",
+    "myDashboard": "My Dashboard",
+    "adminPanel": "Admin Panel"
+  },
+  "auth": {
+    "loginTitle": "Login to your account",
+    "registerTitle": "Create new account",
+    "email": "Email",
+    "password": "Password",
+    "name": "Full Name",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  },
+  "products": {
+    "title": "Products",
+    "allProducts": "All Products",
+    "productDetails": "Product Details",
+    "addToFavorites": "Add to Favorites",
+    "removeFromFavorites": "Remove from Favorites",
+    "comparePrice": "Compare Prices",
+    "brand": "Brand",
+    "category": "Category",
+    "description": "Description",
+    "availableAt": "Available at",
+    "bestPrice": "Best Price",
+    "save": "Save",
+    "notFound": "Product not found"
+  },
+  "stores": {
+    "title": "Stores",
+    "allStores": "All Stores",
+    "storeDetails": "Store Details",
+    "location": "Location",
+    "phone": "Phone",
+    "address": "Address",
+    "city": "City",
+    "viewOnMap": "View on Map",
+    "offers": "Offers"
+  },
+  "favorites": {
+    "title": "My Favorites",
+    "empty": "No favorites yet",
+    "addProducts": "Start adding your favorite products"
+  }
+}
