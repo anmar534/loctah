@@ -1,47 +1,22 @@
-import apiClient from './client';
+import { apiFetch } from './client';
+import type { LoginCredentials, RegisterPayload, User } from '@/types';
 
-export interface LoginCredentials {
-  email: string;
-  password: string;
+export async function login(credentials: LoginCredentials) {
+  return apiFetch<User>('/auth/login', {
+    method: 'POST',
+    body: JSON.stringify(credentials),
+  });
 }
 
-export interface RegisterData {
-  email: string;
-  password: string;
-  name: string;
-  role?: 'USER' | 'VENDOR' | 'ADMIN';
+export async function register(payload: RegisterPayload) {
+  return apiFetch<User>('/auth/register', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
 }
 
-export interface AuthResponse {
-  success: boolean;
-  data: {
-    user: {
-      id: string;
-      email: string;
-      name: string;
-      role: string;
-    };
-    token: string;
-  };
+export async function logout() {
+  return apiFetch<void>('/auth/logout', {
+    method: 'POST',
+  });
 }
-
-export const authApi = {
-  login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
-    const response = await apiClient.post('/auth/login', credentials);
-    return response.data;
-  },
-
-  register: async (data: RegisterData): Promise<AuthResponse> => {
-    const response = await apiClient.post('/auth/register', data);
-    return response.data;
-  },
-
-  getMe: async () => {
-    const response = await apiClient.get('/auth/me');
-    return response.data;
-  },
-
-  logout: () => {
-    localStorage.removeItem('auth-token');
-  },
-};

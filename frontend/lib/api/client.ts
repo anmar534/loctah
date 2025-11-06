@@ -1,40 +1,34 @@
-import axios from 'axios';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000/api';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1';
+type RequestOptions = RequestInit & {
+  params?: Record<string, string | number | boolean | undefined>;
+};
 
-// Create axios instance
-export const apiClient = axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+export async function apiFetch<T>(path: string, options: RequestOptions = {}): Promise<T> {
+  const url = new URL(path, API_BASE_URL);
 
-// Request interceptor to add auth token
-apiClient.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('auth-token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+  if (options.params) {
+    Object.entries(options.params)
+      .filter(([, value]) => value !== undefined)
+      .forEach(([key, value]) => url.searchParams.set(key, String(value)));
   }
-);
 
-// Response interceptor to handle errors
-apiClient.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      // Clear token and redirect to login
-      localStorage.removeItem('auth-token');
-      window.location.href = '/auth/login';
-    }
-    return Promise.reject(error);
+  const response = await fetch(url.toString(), {
+    headers: {
+      'Content-Type': 'application/json',
+      ...(options.headers ?? {}),
+    },
+    ...options,
+  });
+
+  if (!response.ok) {
+    const message = await response.text();
+    throw new Error(message || 'API request failed');
   }
-);
 
-export default apiClient;
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
+  return (await response.json()) as T;
+}

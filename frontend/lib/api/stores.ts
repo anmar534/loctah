@@ -1,30 +1,25 @@
-import apiClient from './client';
+import { apiFetch } from './client';
+import type { PaginatedResponse, Store } from '@/types';
 
-export const storesApi = {
-  getStores: async (city?: string) => {
-    const response = await apiClient.get('/stores', {
-      params: city ? { city } : undefined,
-    });
-    return response.data;
-  },
+export async function listStores(params?: { page?: number; query?: string }) {
+  return apiFetch<PaginatedResponse<Store>>('/stores', {
+    params,
+  });
+}
 
-  getStore: async (id: string) => {
-    const response = await apiClient.get(`/stores/${id}`);
-    return response.data;
-  },
+export async function getStore(id: string) {
+  return apiFetch<Store>(`/stores/${id}`);
+}
 
-  createStore: async (data: any) => {
-    const response = await apiClient.post('/stores', data);
-    return response.data;
-  },
+export async function verifyStore(id: string) {
+  return apiFetch<Store>(`/stores/${id}/verify`, {
+    method: 'POST',
+  });
+}
 
-  updateStore: async (id: string, data: any) => {
-    const response = await apiClient.put(`/stores/${id}`, data);
-    return response.data;
-  },
-
-  deleteStore: async (id: string) => {
-    const response = await apiClient.delete(`/stores/${id}`);
-    return response.data;
-  },
-};
+export async function rejectStoreVerification(id: string, payload?: { reason?: string }) {
+  return apiFetch<Store>(`/stores/${id}/reject`, {
+    method: 'POST',
+    ...(payload?.reason ? { body: JSON.stringify(payload) } : {}),
+  });
+}

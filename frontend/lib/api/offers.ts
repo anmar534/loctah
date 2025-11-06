@@ -1,23 +1,26 @@
-import apiClient from './client';
+import { apiFetch } from './client';
+import type { Offer, PaginatedResponse } from '@/types';
 
-export const offersApi = {
-  getProductOffers: async (productId: string) => {
-    const response = await apiClient.get(`/products/${productId}/offers`);
-    return response.data;
-  },
+export async function listOffers(params?: { page?: number }) {
+  return apiFetch<PaginatedResponse<Offer>>('/offers', {
+    params,
+  });
+}
 
-  createOffer: async (data: any) => {
-    const response = await apiClient.post('/offers', data);
-    return response.data;
-  },
+export async function getOffer(id: string) {
+  return apiFetch<Offer>(`/offers/${id}`);
+}
 
-  updateOffer: async (id: string, data: any) => {
-    const response = await apiClient.put(`/offers/${id}`, data);
-    return response.data;
-  },
+export async function createOffer(payload: Partial<Offer>) {
+  return apiFetch<Offer>('/offers', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
 
-  deleteOffer: async (id: string) => {
-    const response = await apiClient.delete(`/offers/${id}`);
-    return response.data;
-  },
-};
+export async function updateOffer(id: string, payload: Partial<Offer>) {
+  return apiFetch<Offer>(`/offers/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(payload),
+  });
+}

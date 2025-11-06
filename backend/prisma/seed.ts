@@ -78,7 +78,7 @@ async function main() {
     },
   });
 
-  const fashion = await prisma.category.create({
+  await prisma.category.create({
     data: {
       nameAr: 'أزياء',
       nameEn: 'Fashion',
@@ -87,7 +87,7 @@ async function main() {
     },
   });
 
-  const home = await prisma.category.create({
+  await prisma.category.create({
     data: {
       nameAr: 'المنزل والحديقة',
       nameEn: 'Home & Garden',

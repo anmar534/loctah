@@ -17,7 +17,7 @@ router.use('/offers', offersRoutes);
 router.use('/favorites', favoritesRoutes);
 
 // Health check
-router.get('/health', (req, res) => {
+router.get('/health', (_req, res) => {
   res.json({
     success: true,
     message: 'API is running',

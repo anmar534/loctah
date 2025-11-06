@@ -43,10 +43,14 @@
     "noAccount": "Don't have an account?",
     "hasAccount": "Already have an account?",
     "signIn": "Sign In",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "description": "Access your account to track favorites, manage offers and personalize Loctah.",
+    "backToHome": "← Back to home"
   },
   "products": {
     "title": "Products",
+    "pageTitle": "Products",
+    "pageSubtitle": "Browse and compare the latest catalog.",
     "allProducts": "All Products",
     "productDetails": "Product Details",
     "addToFavorites": "Add to Favorites",
@@ -60,6 +64,9 @@
     "save": "Save",
     "notFound": "Product not found"
   },
+  "categories": {
+    "subtitle": "Products curated for this category."
+  },
   "stores": {
     "title": "Stores",
     "allStores": "All Stores",
@@ -69,11 +76,31 @@
     "address": "Address",
     "city": "City",
     "viewOnMap": "View on Map",
-    "offers": "Offers"
+    "offers": "Offers",
+    "verified": "Verified"
   },
   "favorites": {
     "title": "My Favorites",
     "empty": "No favorites yet",
     "addProducts": "Start adding your favorite products"
+  },
+  "search": {
+    "title": "Search results",
+    "placeholder": "Product, store or category",
+    "empty": {
+      "title": "No results",
+      "description": "Try another keyword."
+    }
+  },
+  "admin": {
+    "offers": {
+      "title": "Offers",
+      "description": "Review promotions running across the platform."
+    }
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "The page you were looking for is not available. Check the URL or return home.",
+    "goHome": "Go back home"
   }
 }
