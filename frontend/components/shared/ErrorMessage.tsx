@@ -6,7 +6,7 @@ type ErrorMessageProps = {
 
 export default function ErrorMessage({ title = 'Something went wrong', description, retry }: ErrorMessageProps) {
   return (
-    <div className="flex flex-col gap-3 rounded-lg border border-red-100 bg-red-50 p-5 text-red-700">
+    <div role="alert" aria-live="assertive" className="flex flex-col gap-3 rounded-lg border border-red-100 bg-red-50 p-5 text-red-700">
       <strong className="text-sm font-semibold">{title}</strong>
       {description ? <p className="text-sm text-red-600">{description}</p> : null}
       {retry ? (

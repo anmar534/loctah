@@ -23,6 +23,7 @@ export default function SearchBar({ placeholder = 'Search…', onSearch, classNa
       <span aria-hidden className="text-slate-500">🔍</span>
       <input
         ref={inputRef}
+        aria-label="Search"
         className="h-8 flex-1 border-none bg-transparent text-sm text-slate-700 outline-none"
         placeholder={placeholder}
         type="search"

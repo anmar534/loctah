@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import productsService from '../services/products.service';
 import { sendSuccess, sendError } from '../utils/response.util';
+import { GetProductsQuery } from '../validators/product.validator';
 
 export class ProductsController {
   /**
@@ -8,7 +9,7 @@ export class ProductsController {
    */
   async getProducts(req: Request, res: Response): Promise<void> {
     try {
-      const result = await productsService.getProducts(req.query as any);
+      const result = await productsService.getProducts(req.query as unknown as GetProductsQuery);
       sendSuccess(res, result);
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Failed to get products';

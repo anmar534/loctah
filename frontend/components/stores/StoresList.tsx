@@ -1,9 +1,37 @@
 import StoreCard from './StoreCard';
+import type { Store } from '@/types';
 
-const mockStores = [
-  { id: '1', name: 'Central Market', address: '123 Main St, Springfield', status: 'verified' as const },
-  { id: '2', name: 'Fresh Foods', address: '98 Sunset Blvd, Springfield', status: 'pending' as const },
-  { id: '3', name: 'Daily Essentials', address: '42 Harbor Rd, Springfield', status: 'verified' as const },
+// Static timestamp for deterministic mock data
+const STATIC_TS = '2023-01-01T00:00:00.000Z';
+
+const mockStores: Store[] = [
+  { 
+    id: '1', 
+    slug: 'central-market',
+    name: 'Central Market', 
+    address: '123 Main St, Springfield', 
+    status: 'verified',
+    createdAt: STATIC_TS,
+    updatedAt: STATIC_TS,
+  },
+  { 
+    id: '2', 
+    slug: 'fresh-foods',
+    name: 'Fresh Foods', 
+    address: '98 Sunset Blvd, Springfield', 
+    status: 'pending',
+    createdAt: STATIC_TS,
+    updatedAt: STATIC_TS,
+  },
+  { 
+    id: '3', 
+    slug: 'daily-essentials',
+    name: 'Daily Essentials', 
+    address: '42 Harbor Rd, Springfield', 
+    status: 'verified',
+    createdAt: STATIC_TS,
+    updatedAt: STATIC_TS,
+  },
 ];
 
 export default function StoresList() {

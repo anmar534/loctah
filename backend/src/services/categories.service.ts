@@ -1,5 +1,18 @@
 import prisma from '../config/database';
 
+type CreateCategoryData = {
+  nameEn: string;
+  nameAr: string;
+  slug: string;
+  descriptionEn?: string;
+  descriptionAr?: string;
+  parentId?: string;
+  imageUrl?: string;
+  isActive?: boolean;
+};
+
+type UpdateCategoryData = Partial<CreateCategoryData>;
+
 export class CategoriesService {
   /**
    * Get all categories
@@ -103,7 +116,7 @@ export class CategoriesService {
   /**
    * Create category (Admin only)
    */
-  async createCategory(data: any) {
+  async createCategory(data: CreateCategoryData) {
     // Check if slug already exists
     const existingSlug = await prisma.category.findUnique({
       where: { slug: data.slug },
@@ -137,7 +150,7 @@ export class CategoriesService {
   /**
    * Update category (Admin only)
    */
-  async updateCategory(id: string, data: any) {
+  async updateCategory(id: string, data: UpdateCategoryData) {
     const existingCategory = await prisma.category.findUnique({
       where: { id },
     });

@@ -1,5 +1,13 @@
 import { cn } from '@/lib/utils';
 
 export function Skeleton({ className }: { className?: string }) {
-  return <div className={cn('h-4 w-full animate-pulse rounded-md bg-slate-200', className)} />;
+  return (
+    <div 
+      className={cn('h-4 w-full animate-pulse rounded-md bg-slate-200', className)}
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+      aria-label="Loading…"
+    />
+  );
 }

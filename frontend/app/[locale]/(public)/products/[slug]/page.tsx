@@ -7,15 +7,15 @@ import type { Product } from '@/types';
 import { notFound } from 'next/navigation';
 
 type ProductPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export default async function ProductDetailsPage({ params }: ProductPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
 
-  let product: Product | null = null;
+  let product: Product | null | undefined = null;
 
   try {
     product = await getProduct(slug);
@@ -31,7 +31,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
   const productId = product.id || slug;
   const title = product.title || product.name || 'Product';
   const description = product.description || 'No description available.';
-  const price = Number.isFinite(product.price) ? product.price : 0;
+  const price = Number.isFinite(product.price) ? product.price : null;
   const currency = product.currency || 'USD';
 
   return (
@@ -53,7 +53,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
           <h1 className="mt-2 text-3xl font-semibold tracking-tight">{title}</h1>
         </header>
         <p className="text-base text-slate-600">{description}</p>
-        <PriceComparison currency={currency} productId={productId} value={price} />
+        <PriceComparison currency={currency} value={price} />
       </div>
     </article>
   );

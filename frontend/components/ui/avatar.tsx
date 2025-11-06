@@ -7,7 +7,7 @@ type AvatarProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 export function Avatar({ className, src, name, ...props }: AvatarProps) {
-  const initials = name?.split(' ').map((part) => part.charAt(0).toUpperCase()).join('').slice(0, 2) ?? 'U';
+  const initials = name?.split(' ').filter(Boolean).map((part) => part.charAt(0).toUpperCase()).join('').slice(0, 2) || 'U';
 
   return (
     <div

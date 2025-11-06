@@ -14,10 +14,21 @@ export default async function AdminUserDetailsPage({ params }: PageProps) {
   try {
     user = await getUser(id);
   } catch (error) {
+    // Only call notFound() for actual 404 errors
+    if (error instanceof Error && error.message.includes('404')) {
+      notFound();
+    }
+    // Log and rethrow other errors for proper error handling
+    console.error('Failed to fetch user:', error);
+    throw error;
+  }
+
+  // Ensure user exists (getUser may return undefined)
+  if (!user) {
     notFound();
   }
 
-  const status = user?.status ?? 'active';
+  const status = user.status ?? 'active';
 
   return (
     <div className="flex flex-col gap-6">

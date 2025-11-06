@@ -7,8 +7,22 @@ export async function listStores(params?: { page?: number; query?: string }) {
   });
 }
 
-export async function getStore(id: string) {
-  return apiFetch<Store>(`/stores/${id}`);
+export async function getStore(id: string, options?: RequestInit) {
+  return apiFetch<Store>(`/stores/${encodeURIComponent(id)}`, options);
+}
+
+export async function createStore(payload: Partial<Store>) {
+  return apiFetch<Store>('/stores', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function updateStore(id: string, payload: Partial<Store>) {
+  return apiFetch<Store>(`/stores/${encodeURIComponent(id)}`, {
+    method: 'PUT',
+    body: JSON.stringify(payload),
+  });
 }
 
 export async function verifyStore(id: string) {

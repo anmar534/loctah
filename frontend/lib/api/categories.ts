@@ -6,7 +6,7 @@ export async function listCategories() {
 }
 
 export async function getCategory(slug: string) {
-  return apiFetch<Category>(`/categories/${slug}`);
+  return apiFetch<Category>(`/categories/${encodeURIComponent(slug)}`);
 }
 
 export async function createCategory(payload: Partial<Category>) {
@@ -16,8 +16,8 @@ export async function createCategory(payload: Partial<Category>) {
   });
 }
 
-export async function updateCategory(id: string, payload: Partial<Category>) {
-  return apiFetch<Category>(`/categories/${id}`, {
+export async function updateCategory(slug: string, payload: Partial<Category>) {
+  return apiFetch<Category>(`/categories/${encodeURIComponent(slug)}`, {
     method: 'PUT',
     body: JSON.stringify(payload),
   });

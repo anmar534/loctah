@@ -1,12 +1,13 @@
 import prisma from '../config/database';
 import { CreateStoreInput, UpdateStoreInput } from '../validators/store.validator';
+import { Prisma } from '@prisma/client';
 
 export class StoresService {
   /**
    * Get all stores
    */
   async getStores(city?: string) {
-    const where: any = { isActive: true };
+    const where: Prisma.StoreWhereInput = { isActive: true };
     
     if (city) {
       where.city = city;

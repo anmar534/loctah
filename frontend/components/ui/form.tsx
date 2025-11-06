@@ -1,4 +1,4 @@
-import type { FormHTMLAttributes, HTMLAttributes } from 'react';
+import type { FormHTMLAttributes, HTMLAttributes, LabelHTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 
 export function Form({ className, ...props }: FormHTMLAttributes<HTMLFormElement>) {
@@ -9,8 +9,8 @@ export function FormField({ className, ...props }: HTMLAttributes<HTMLDivElement
   return <div className={cn('flex flex-col gap-1', className)} {...props} />;
 }
 
-export function FormLabel({ className, ...props }: HTMLAttributes<HTMLSpanElement>) {
-  return <span className={cn('text-sm font-medium text-slate-700', className)} {...props} />;
+export function FormLabel({ className, ...props }: LabelHTMLAttributes<HTMLLabelElement>) {
+  return <label className={cn('text-sm font-medium text-slate-700', className)} {...props} />;
 }
 
 export function FormMessage({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) {

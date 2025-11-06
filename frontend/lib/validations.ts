@@ -9,8 +9,9 @@ export function validateRequired(value: unknown, message = 'This field is requir
 }
 
 export function validateEmail(value: string, message = 'Enter a valid email address'): ValidationResult {
+  const trimmed = value.trim();
   const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return pattern.test(value) ? { valid: true } : { valid: false, message };
+  return pattern.test(trimmed) ? { valid: true } : { valid: false, message };
 }
 
 export function validatePassword(value: string, message = 'Password must be at least 8 characters'): ValidationResult {
@@ -29,8 +30,9 @@ export function validatePasswordStrength(value: string): ValidationResult {
 }
 
 export function validatePhone(value: string, message = 'Enter a valid phone number'): ValidationResult {
-  const digits = value.replace(/[^\d+]/g, '');
-  return digits.length >= 7 ? { valid: true } : { valid: false, message };
+  // Strip all non-digit characters (including '+') to count only digits
+  const digitsOnly = value.replace(/\D/g, '');
+  return digitsOnly.length >= 7 ? { valid: true } : { valid: false, message };
 }
 
 export function validatePrice(value: number | string, message = 'Price must be zero or greater'): ValidationResult {

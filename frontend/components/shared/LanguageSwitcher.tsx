@@ -20,7 +20,7 @@ export default function LanguageSwitcher({ locales = ['en', 'ar'] }: LanguageSwi
           key={locale}
           className={cn(
             'rounded-full px-3 py-1 font-semibold uppercase transition',
-            pathname.includes(`/${locale}`)
+            pathname.split('/')[1] === locale
               ? 'bg-slate-900 text-white'
               : 'text-slate-600 hover:text-slate-900'
           )}

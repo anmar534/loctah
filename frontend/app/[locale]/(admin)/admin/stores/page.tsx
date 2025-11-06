@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import DataTable, { type DataTableColumn } from '@/components/admin/DataTable';
 import StatusBadge from '@/components/admin/StatusBadge';
 import Link from 'next/link';
@@ -47,15 +50,31 @@ const columns: DataTableColumn<Store>[] = [
   },
 ];
 
-export default async function AdminStoresPage() {
-  let stores: Store[] = [];
-  
-  try {
-    const response = await listStores();
-    stores = response.data;
-  } catch (error) {
-    console.error('Failed to fetch stores:', error);
-  }
+export default function AdminStoresPage() {
+  const [stores, setStores] = useState<Store[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchStores = async () => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const response = await listStores();
+      if (response) {
+        setStores(response.data);
+      }
+    } catch (err) {
+      console.error('Failed to fetch stores:', err);
+      setError('Failed to load stores. Please check your connection and try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchStores();
+  }, []);
 
   return (
     <div className="flex flex-col gap-6">
@@ -63,7 +82,32 @@ export default async function AdminStoresPage() {
         <h1 className="text-2xl font-semibold tracking-tight">Stores</h1>
         <p className="text-sm text-slate-600">Review partner stores and verification status.</p>
       </header>
-      <DataTable title="All stores" data={stores} columns={columns} />
+
+      {error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4" role="alert">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h3 className="font-semibold text-red-900">Error loading stores</h3>
+              <p className="mt-1 text-sm text-red-700">{error}</p>
+            </div>
+            <button
+              onClick={fetchStores}
+              className="rounded-md bg-red-100 px-3 py-1.5 text-sm font-medium text-red-900 hover:bg-red-200"
+              type="button"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      )}
+
+      {loading && !error && (
+        <div className="flex items-center justify-center py-12">
+          <p className="text-slate-500">Loading stores...</p>
+        </div>
+      )}
+
+      {!loading && !error && <DataTable title="All stores" data={stores} columns={columns} />}
     </div>
   );
 }

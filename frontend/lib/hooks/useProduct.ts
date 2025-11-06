@@ -18,7 +18,7 @@ export function useProduct(slug: string) {
     getProduct(slug)
       .then((response) => {
         if (!active) return;
-        setData(response);
+        setData(response || null);
         setError(null);
       })
       .catch((err) => {

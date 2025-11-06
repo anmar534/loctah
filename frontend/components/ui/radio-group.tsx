@@ -1,12 +1,13 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useId } from 'react';
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
 type RadioGroupContextValue = {
   value: string;
   setValue: (value: string) => void;
+  name: string;
 };
 
 const RadioGroupContext = createContext<RadioGroupContextValue | undefined>(undefined);
@@ -26,11 +27,13 @@ export function RadioGroup({
 }) {
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue ?? '');
   const value = controlledValue ?? uncontrolledValue;
+  const name = useId();
 
   return (
     <RadioGroupContext.Provider
       value={{
         value,
+        name,
         setValue: (next) => {
           setUncontrolledValue(next);
           onValueChange?.(next);
@@ -52,7 +55,7 @@ export function RadioGroupItem({ value, children }: { value: string; children: R
       <input
         checked={context.value === value}
         className="h-4 w-4 rounded-full border border-slate-300 text-slate-900 focus:ring-slate-400"
-        name="radio-group"
+        name={context.name}
         onChange={() => context.setValue(value)}
         type="radio"
         value={value}

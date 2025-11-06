@@ -11,12 +11,16 @@ const sizeMap: Record<Required<LoadingSpinnerProps>['size'], string> = {
 
 export function LoadingSpinner({ label, size = 'md' }: LoadingSpinnerProps) {
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div role="status" className="flex flex-col items-center gap-3">
       <span
         aria-hidden
         className={`inline-block animate-spin rounded-full border-slate-300 border-t-slate-900 ${sizeMap[size]}`}
       />
-      {label ? <span className="text-sm text-slate-600">{label}</span> : null}
+      {label ? (
+        <span className="text-sm text-slate-600">{label}</span>
+      ) : (
+        <span className="sr-only">Loading...</span>
+      )}
     </div>
   );
 }

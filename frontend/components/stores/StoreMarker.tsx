@@ -13,6 +13,7 @@ export default function StoreMarker({ storeId, active = false, onSelect }: Store
         active ? 'border-emerald-300 bg-emerald-600 text-white' : 'border-white bg-slate-900 text-white'
       }`}
       onClick={onSelect}
+      aria-pressed={active}
       title={`Store ${storeId}`}
       type="button"
     >

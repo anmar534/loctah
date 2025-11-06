@@ -9,19 +9,21 @@ export function useOffers(params?: { page?: number }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const page = params?.page;
+
   useEffect(() => {
     let active = true;
     setLoading(true);
 
-    listOffers(params)
+    listOffers({ page })
       .then((response) => {
         if (!active) return;
-        setData(response);
+        setData(response || null);
         setError(null);
       })
       .catch((err) => {
         if (!active) return;
-        setError((err as Error).message);
+        setError(err instanceof Error ? err.message : String(err));
       })
       .finally(() => {
         if (!active) return;
@@ -31,7 +33,7 @@ export function useOffers(params?: { page?: number }) {
     return () => {
       active = false;
     };
-  }, [params?.page]);
+  }, [page]);
 
   return { data, loading, error } as const;
 }

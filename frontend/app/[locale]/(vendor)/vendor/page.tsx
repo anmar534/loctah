@@ -7,7 +7,13 @@ export default async function VendorDashboardPage() {
   try {
     stats = await getVendorStats();
   } catch (error) {
-    throw new Error('Failed to load vendor statistics');
+    console.error('Failed to load vendor statistics:', error);
+    throw new Error('Failed to load vendor statistics', { cause: error });
+  }
+
+  // Ensure stats exists (getVendorStats may return undefined)
+  if (!stats) {
+    throw new Error('Vendor statistics data is unavailable');
   }
 
   return (

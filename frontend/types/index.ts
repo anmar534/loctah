@@ -15,6 +15,14 @@ export type User = {
   updatedAt: string;
 };
 
+// Restricted payload for profile updates - only allows user-editable fields
+// Sensitive fields like id, email, role, status, emailVerified, createdAt, updatedAt are excluded
+export type UpdateProfilePayload = {
+  name?: string;
+  avatarUrl?: string | null;
+  phone?: string | null;
+};
+
 export type Category = {
   id: string;
   slug: string;
@@ -79,7 +87,7 @@ export type Product = {
   name?: string;
   description: string;
   shortDescription?: string | null;
-  price: number;
+  price: number | null;
   currency: string;
   sku?: string | null;
   stock: number;
@@ -144,6 +152,11 @@ export type DashboardSummary = {
 export type LoginCredentials = {
   email: string;
   password: string;
+};
+
+export type LoginResponse = {
+  user: User;
+  token: string;
 };
 
 export type RegisterPayload = {

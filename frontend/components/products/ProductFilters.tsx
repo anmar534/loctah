@@ -20,6 +20,7 @@ export default function ProductFilters() {
         {filters.map((filter) => (
           <li key={filter.id}>
             <button
+              aria-pressed={!!activeFilters[filter.id]}
               className="flex w-full items-center justify-between rounded-md border border-slate-200 px-3 py-2"
               onClick={() => toggleFilter(filter.id)}
               type="button"

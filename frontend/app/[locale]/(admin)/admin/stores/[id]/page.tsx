@@ -15,10 +15,21 @@ export default async function AdminStoreDetailsPage({ params }: PageProps) {
   try {
     store = await getStore(id);
   } catch (error) {
+    // Only call notFound() for actual 404 errors
+    if (error instanceof Error && error.message.includes('404')) {
+      notFound();
+    }
+    // Log and rethrow other errors for proper error handling
+    console.error('Failed to fetch store:', error);
+    throw error;
+  }
+
+  // Ensure store exists (getStore may return undefined)
+  if (!store) {
     notFound();
   }
 
-  const status: StoreStatus = store?.status ?? 'pending';
+  const status: StoreStatus = store.status ?? 'pending';
   
   const statusMessages: Record<StoreStatus, string> = {
     pending: 'Awaiting verification',

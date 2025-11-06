@@ -4,9 +4,10 @@ import { useRef, useState } from 'react';
 
 type ImageUploadProps = {
   label?: string;
+  onChange?: (files: File[]) => void;
 };
 
-export default function ImageUpload({ label = 'Upload image' }: ImageUploadProps) {
+export default function ImageUpload({ label = 'Upload image', onChange }: ImageUploadProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [files, setFiles] = useState<File[]>([]);
 
@@ -30,12 +31,16 @@ export default function ImageUpload({ label = 'Upload image' }: ImageUploadProps
         onChange={(event) => {
           const selected = Array.from(event.target.files ?? []);
           setFiles(selected);
+          onChange?.(selected);
         }}
       />
       {files.length ? (
         <ul className="flex flex-wrap gap-2 text-xs text-slate-500">
-          {files.map((file) => (
-            <li className="rounded-md border border-slate-200 px-2 py-1" key={file.name}>
+          {files.map((file, index) => (
+            <li
+              className="rounded-md border border-slate-200 px-2 py-1"
+              key={`${file.name}-${file.size}-${file.lastModified}-${index}`}
+            >
               {file.name}
             </li>
           ))}

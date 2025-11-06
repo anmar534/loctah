@@ -16,12 +16,12 @@ export function useCategories() {
     listCategories()
       .then((response) => {
         if (!active) return;
-        setCategories(response);
+        setCategories(response || []);
         setError(null);
       })
       .catch((err) => {
         if (!active) return;
-        setError((err as Error).message);
+        setError(err instanceof Error ? err.message : String(err));
       })
       .finally(() => {
         if (!active) return;

@@ -8,38 +8,46 @@ export function useStore(id?: string | null) {
   const [data, setData] = useState<Store | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const isMounted = useRef(true);
-
-  useEffect(() => {
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   const fetchStore = useCallback(async () => {
+    // Abort any existing request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
     if (!id) {
-      if (isMounted.current) {
-        setData(null);
-      }
+      setData(null);
+      setLoading(false);
+      setError(null);
       return;
     }
 
-    if (isMounted.current) {
-      setLoading(true);
-      setError(null);
-    }
+    // Create new AbortController for this request
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
+    setLoading(true);
+    setError(null);
 
     try {
-      const response = await getStore(id);
-      if (isMounted.current) {
-        setData(response);
+      const response = await getStore(id, { signal: controller.signal });
+      // Only update state if request wasn't aborted
+      if (!controller.signal.aborted) {
+        setData(response || null);
       }
     } catch (err) {
-      if (isMounted.current) {
-        setError((err as Error).message ?? 'Failed to load store.');
+      // Ignore AbortError, don't update state for aborted requests
+      if (err instanceof Error && err.name === 'AbortError') {
+        return;
+      }
+      // Handle other errors
+      if (!controller.signal.aborted) {
+        setError(err instanceof Error ? err.message : 'Failed to load store.');
       }
     } finally {
-      if (isMounted.current) {
+      // Only update loading state if request wasn't aborted
+      if (!controller.signal.aborted) {
         setLoading(false);
       }
     }
@@ -47,6 +55,13 @@ export function useStore(id?: string | null) {
 
   useEffect(() => {
     void fetchStore();
+
+    // Cleanup: abort on unmount or when id changes
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
   }, [fetchStore]);
 
   return {

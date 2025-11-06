@@ -5,13 +5,13 @@ export const USER_ROLES = ['user', 'vendor', 'admin'] as const;
 export const STORE_STATUSES = ['pending', 'verified', 'suspended'] as const;
 
 export const THEME_OPTIONS = ['light', 'dark', 'system'] as const;
-export const DEFAULT_THEME = 'system';
+export const DEFAULT_THEME = THEME_OPTIONS[2];
 
-export const DEFAULT_PAGE_SIZE = 12;
 export const PAGE_SIZE_OPTIONS = [12, 24, 48] as const;
+export const DEFAULT_PAGE_SIZE = PAGE_SIZE_OPTIONS[0];
 
-export const DEFAULT_CURRENCY = 'AED';
 export const SUPPORTED_CURRENCIES = ['AED', 'USD', 'SAR', 'EGP'] as const;
+export const DEFAULT_CURRENCY = SUPPORTED_CURRENCIES[0];
 
 export const MAP_DEFAULT_COORDINATES = {
   lat: 25.2048,
@@ -31,6 +31,6 @@ export const STORAGE_KEYS = {
 export const FALLBACK_IMAGE = '/images/placeholder.png';
 
 export const FEATURE_FLAGS = {
-  enableMockData: true,
-  enableAnalytics: false,
+  enableMockData: process.env.NEXT_PUBLIC_ENABLE_MOCK_DATA === 'true',
+  enableAnalytics: process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === 'true',
 } as const;

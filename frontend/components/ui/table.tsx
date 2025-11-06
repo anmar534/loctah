@@ -17,8 +17,8 @@ export function TableRow({ className, ...props }: HTMLAttributes<HTMLTableRowEle
   return <tr className={cn('hover:bg-slate-50', className)} {...props} />;
 }
 
-export function TableHead({ className, ...props }: HTMLAttributes<HTMLTableCellElement>) {
-  return <th className={cn('px-4 py-3 text-left font-medium', className)} {...props} />;
+export function TableHead({ className, scope = 'col', ...props }: HTMLAttributes<HTMLTableCellElement> & { scope?: 'col' | 'row' }) {
+  return <th className={cn('px-4 py-3 text-left font-medium', className)} scope={scope} {...props} />;
 }
 
 export function TableCell({ className, ...props }: HTMLAttributes<HTMLTableCellElement>) {

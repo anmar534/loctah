@@ -12,7 +12,7 @@ export default function VendorOffersPage() {
         </div>
         <Link
           className="inline-flex items-center gap-2 rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-emerald-700"
-          href="offers/create"
+          href="./create"
         >
           Create offer
         </Link>

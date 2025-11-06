@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
@@ -5,7 +7,7 @@ import { useParams } from 'next/navigation';
 const DEFAULT_LOCALE = 'en';
 
 export default function LocaleNotFound() {
-  const t = useTranslations('NotFound');
+  const t = useTranslations('notFound');
   const params = useParams();
   const locale = (params.locale as string) || DEFAULT_LOCALE;
 

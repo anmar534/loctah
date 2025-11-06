@@ -10,5 +10,5 @@ export async function listUsers() {
 }
 
 export async function getUser(id: string) {
-  return apiFetch<User>(`/admin/users/${id}`);
+  return apiFetch<User>(`/admin/users/${encodeURIComponent(id)}`);
 }

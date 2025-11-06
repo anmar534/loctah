@@ -20,7 +20,7 @@ export default function ProductCard({ id, title, description, image, price, curr
         <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
         <p className="flex-1 text-sm text-slate-600">{description}</p>
         <div className="flex items-center justify-between">
-          <PriceComparison currency={currency} productId={id} size="sm" value={price} />
+          <PriceComparison currency={currency} size="sm" value={price} />
           <FavoriteButton productId={id} />
         </div>
       </div>

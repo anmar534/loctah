@@ -4,7 +4,13 @@ export function cn(...inputs: ClassValue[]): string {
   return inputs.filter(Boolean).join(' ');
 }
 
-export function formatCurrency(value: number, locale = 'en', currency = 'USD'): string {
+export function formatCurrency(value: number | null, locale = 'en', currency = 'USD'): string {
+  if (value === null) {
+    return 'Price unavailable';
+  }
+  if (value === 0) {
+    return 'Free';
+  }
   return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(value);
 }
 

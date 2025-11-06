@@ -1,5 +1,6 @@
 import prisma from '../config/database';
 import { CreateProductInput, UpdateProductInput, GetProductsQuery } from '../validators/product.validator';
+import { Prisma } from '@prisma/client';
 
 export class ProductsService {
   /**
@@ -11,7 +12,7 @@ export class ProductsService {
     const skip = (page - 1) * limit;
 
     // Build where clause
-    const where: any = {};
+    const where: Prisma.ProductWhereInput = {};
 
     if (query.search) {
       where.OR = [

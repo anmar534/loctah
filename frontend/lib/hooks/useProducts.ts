@@ -15,7 +15,7 @@ export function useProducts(params?: { page?: number; query?: string; category?:
     listProducts(params)
       .then((response) => {
         if (!active) return;
-        setData(response);
+        setData(response || null);
         setError(null);
       })
       .catch((err) => {

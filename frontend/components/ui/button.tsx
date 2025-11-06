@@ -21,9 +21,10 @@ const sizeMap: Record<NonNullable<ButtonProps['size']>, string> = {
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'default', size = 'md', ...props }, ref) => (
+  ({ className, variant = 'default', size = 'md', type = 'button', ...props }, ref) => (
     <button
       ref={ref}
+      type={type}
       className={cn(
         'inline-flex items-center justify-center rounded-md font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2',
         variantMap[variant],

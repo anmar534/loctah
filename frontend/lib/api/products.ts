@@ -1,9 +1,11 @@
 import { apiFetch } from './client';
 import type { PaginatedResponse, Product } from '@/types';
 
-export async function listProducts(params?: { page?: number; query?: string; category?: string }) {
+export async function listProducts(params?: { page?: number; query?: string; category?: string; signal?: AbortSignal }) {
+  const { signal, ...queryParams } = params ?? {};
   return apiFetch<PaginatedResponse<Product>>('/products', {
-    params,
+    params: queryParams,
+    signal,
   });
 }
 

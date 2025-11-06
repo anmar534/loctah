@@ -20,6 +20,7 @@
     "edit": "Edit",
     "add": "Add",
     "loading": "Loading...",
+    "loadingContent": "Loading content",
     "error": "Error",
     "success": "Success"
   },
@@ -87,18 +88,45 @@
   "search": {
     "title": "Search results",
     "placeholder": "Product, store or category",
+    "loading": "Searching...",
     "empty": {
       "title": "No results",
       "description": "Try another keyword."
     }
   },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage notifications, privacy and account preferences.",
+    "placeholder": "Add settings controls here."
+  },
   "admin": {
+    "dashboard": {
+      "title": "Admin dashboard",
+      "subtitle": "Monitor activity and manage the platform."
+    },
     "offers": {
       "title": "Offers",
       "description": "Review promotions running across the platform."
+    },
+    "categories": {
+      "create": {
+        "title": "Create category",
+        "subtitle": "Introduce a new grouping for products."
+      }
     }
   },
-  "NotFound": {
+  "vendorOffers": {
+    "createTitle": "Create offer",
+    "createSubtitle": "Launch a new promotion for your audience.",
+    "editTitle": "Edit offer",
+    "editSubtitle": "Adjust discount details for offer #{id}."
+  },
+  "error": {
+    "title": "Something went wrong",
+    "message": "We could not load this page. Try again in a moment.",
+    "retry": "Retry"
+  },
+  "notFound": {
     "title": "Page not found",
     "description": "The page you were looking for is not available. Check the URL or return home.",
     "goHome": "Go back home"

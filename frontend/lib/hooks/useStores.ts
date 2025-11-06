@@ -12,16 +12,23 @@ export function useStores(params?: { page?: number; query?: string }) {
   useEffect(() => {
     let active = true;
     setLoading(true);
+    setError(null);
 
     listStores(params)
       .then((response) => {
         if (!active) return;
-        setData(response);
+        setData(response ?? null);
         setError(null);
       })
       .catch((err) => {
         if (!active) return;
-        setError((err as Error).message);
+        const errorMessage = 
+          typeof err === 'string' 
+            ? err 
+            : err instanceof Error 
+            ? err.message 
+            : String(err);
+        setError(errorMessage);
       })
       .finally(() => {
         if (!active) return;
