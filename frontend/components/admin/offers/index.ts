@@ -6,4 +6,5 @@
 
 // Offer components
 export { default as OfferForm } from './OfferForm';
+export { default as OfferList } from './OfferList';
 
