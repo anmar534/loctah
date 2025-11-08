@@ -26,7 +26,10 @@
     "confirm": "Confirm",
     "view": "View",
     "discount": "Discount",
-    "expiresOn": "Expires on"
+    "expiresOn": "Expires on",
+    "all": "All",
+    "active": "Active",
+    "inactive": "Inactive"
   },
   "validation": {
     "nameRequired": "Name is required (minimum 2 characters)",
@@ -173,6 +176,19 @@
         "status": "Status",
         "offersCount": "Offers Count",
         "actions": "Actions"
+      },
+      "table": {
+        "logo": "Logo",
+        "name": "Name",
+        "city": "City",
+        "contact": "Contact",
+        "status": "Status",
+        "createdAt": "Created At",
+        "actions": "Actions"
+      },
+      "filters": {
+        "city": "City",
+        "status": "Status"
       }
     },
     "categories": {
@@ -234,7 +250,12 @@
       "noCategories": "No categories yet",
       "deleteSuccess": "Category deleted successfully",
       "deleteError": "Failed to delete category. It may contain subcategories or products.",
-      "fetchError": "Failed to load categories. Please try again."
+      "fetchError": "Failed to load categories. Please try again.",
+      "empty": {
+        "title": "No categories yet",
+        "description": "Start by creating a main category to organize your products",
+        "action": "Add Main Category"
+      }
     },
     "products": {
       "title": "Products",
@@ -344,6 +365,19 @@
         "offersCount": "Offers Count",
         "status": "Status",
         "actions": "Actions"
+      },
+      "table": {
+        "image": "Image",
+        "title": "Title",
+        "category": "Category",
+        "brand": "Brand",
+        "price": "Price",
+        "stock": "Stock",
+        "actions": "Actions"
+      },
+      "filters": {
+        "category": "Category",
+        "brand": "Brand"
       }
     },
     "offers": {
@@ -372,6 +406,25 @@
         "validUntil": "Valid Until",
         "status": "Status",
         "actions": "Actions"
+      },
+      "table": {
+        "image": "Image",
+        "title": "Title",
+        "store": "Store",
+        "price": "Price",
+        "discount": "Discount",
+        "dates": "Dates",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "filters": {
+        "status": "Status"
+      },
+      "status": {
+        "expired": "Expired"
+      },
+      "actions": {
+        "visitLink": "Visit Link"
       },
       "create": {
         "title": "Add New Offer",

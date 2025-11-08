@@ -26,7 +26,10 @@
     "confirm": "تأكيد",
     "view": "عرض",
     "discount": "خصم",
-    "expiresOn": "ينتهي في"
+    "expiresOn": "ينتهي في",
+    "all": "الكل",
+    "active": "نشط",
+    "inactive": "غير نشط"
   },
   "validation": {
     "nameRequired": "الاسم مطلوب (حد أدنى حرفين)",
@@ -173,6 +176,19 @@
         "status": "الحالة",
         "offersCount": "عدد العروض",
         "actions": "الإجراءات"
+      },
+      "table": {
+        "logo": "الشعار",
+        "name": "الاسم",
+        "city": "المدينة",
+        "contact": "التواصل",
+        "status": "الحالة",
+        "createdAt": "تاريخ الإنشاء",
+        "actions": "الإجراءات"
+      },
+      "filters": {
+        "city": "المدينة",
+        "status": "الحالة"
       }
     },
     "categories": {
@@ -234,7 +250,12 @@
       "noCategories": "لا توجد فئات بعد",
       "deleteSuccess": "تم حذف الفئة بنجاح",
       "deleteError": "فشل حذف الفئة. قد تحتوي على فئات فرعية أو منتجات.",
-      "fetchError": "فشل تحميل الفئات. حاول مرة أخرى."
+      "fetchError": "فشل تحميل الفئات. حاول مرة أخرى.",
+      "empty": {
+        "title": "لا توجد فئات بعد",
+        "description": "ابدأ بإنشاء فئة رئيسية لتنظيم منتجاتك",
+        "action": "إضافة فئة رئيسية"
+      }
     },
     "products": {
       "title": "المنتجات",
@@ -344,6 +365,19 @@
         "offersCount": "عدد العروض",
         "status": "الحالة",
         "actions": "الإجراءات"
+      },
+      "table": {
+        "image": "الصورة",
+        "title": "العنوان",
+        "category": "الفئة",
+        "brand": "العلامة التجارية",
+        "price": "السعر",
+        "stock": "المخزون",
+        "actions": "الإجراءات"
+      },
+      "filters": {
+        "category": "الفئة",
+        "brand": "العلامة التجارية"
       }
     },
     "offers": {
@@ -445,6 +479,25 @@
         "validUntil": "صالح حتى",
         "status": "الحالة",
         "actions": "الإجراءات"
+      },
+      "table": {
+        "image": "الصورة",
+        "title": "العنوان",
+        "store": "المتجر",
+        "price": "السعر",
+        "discount": "الخصم",
+        "dates": "التواريخ",
+        "status": "الحالة",
+        "actions": "الإجراءات"
+      },
+      "filters": {
+        "status": "الحالة"
+      },
+      "status": {
+        "expired": "منتهي"
+      },
+      "actions": {
+        "visitLink": "زيارة الرابط"
       }
     },
     "users": {
