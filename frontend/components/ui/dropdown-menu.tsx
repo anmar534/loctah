@@ -1,7 +1,7 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, useRef, useId } from 'react';
-import type { ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useRef, useId, cloneElement, isValidElement } from 'react';
+import type { ReactNode, ReactElement } from 'react';
 import { createPortal } from 'react-dom';
 import { cn } from '@/lib/utils';
 
@@ -55,7 +55,7 @@ export function DropdownMenu({ children }: { children: ReactNode }) {
   // Focus first menu item when opened
   useEffect(() => {
     if (open && contentRef.current) {
-      const firstMenuItem = contentRef.current.querySelector('button[role="menuitem"]') as HTMLButtonElement;
+      const firstMenuItem = contentRef.current.querySelector('button[role="menuitem"], div[role="menuitem"]') as HTMLElement;
       firstMenuItem?.focus();
     }
   }, [open]);
@@ -67,8 +67,22 @@ export function DropdownMenu({ children }: { children: ReactNode }) {
   );
 }
 
-export function DropdownMenuTrigger({ children }: { children: ReactNode }) {
+export function DropdownMenuTrigger({ children, asChild }: { children: ReactNode; asChild?: boolean }) {
   const context = useDropdownContext();
+
+  if (asChild && isValidElement(children)) {
+    // Clone the child element and merge props
+    return cloneElement(children as ReactElement, {
+      ref: context.triggerRef,
+      onClick: (e: React.MouseEvent) => {
+        context.setOpen(!context.open);
+        (children as ReactElement).props?.onClick?.(e);
+      },
+      'aria-expanded': context.open,
+      'aria-haspopup': true,
+      'aria-controls': context.menuId,
+    });
+  }
 
   return (
     <button
@@ -114,10 +128,10 @@ export function DropdownMenuContent({ className, children }: { className?: strin
       if (!context.contentRef.current) return;
 
       const menuItems = Array.from(
-        context.contentRef.current.querySelectorAll('button[role="menuitem"]')
-      ) as HTMLButtonElement[];
+        context.contentRef.current.querySelectorAll('button[role="menuitem"], div[role="menuitem"]')
+      ) as HTMLElement[];
 
-      const currentIndex = menuItems.indexOf(document.activeElement as HTMLButtonElement);
+      const currentIndex = menuItems.indexOf(document.activeElement as HTMLElement);
 
       switch (event.key) {
         case 'ArrowDown':
@@ -168,7 +182,17 @@ export function DropdownMenuContent({ className, children }: { className?: strin
   return createPortal(content, document.body);
 }
 
-export function DropdownMenuItem({ className, children, onSelect }: { className?: string; children: ReactNode; onSelect?: () => void }) {
+export function DropdownMenuItem({ 
+  className, 
+  children, 
+  onSelect,
+  asChild 
+}: { 
+  className?: string; 
+  children: ReactNode; 
+  onSelect?: () => void;
+  asChild?: boolean;
+}) {
   const context = useDropdownContext();
 
   const handleClick = () => {
@@ -177,12 +201,27 @@ export function DropdownMenuItem({ className, children, onSelect }: { className?
     context.triggerRef.current?.focus();
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+  const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       handleClick();
     }
   };
+
+  // If asChild is true, wrap children and let them handle rendering
+  if (asChild) {
+    return (
+      <div
+        role="menuitem"
+        tabIndex={-1}
+        className={cn('flex w-full items-center rounded-md text-sm text-slate-600 hover:bg-slate-100 focus-within:bg-slate-100', className)}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+      >
+        {children}
+      </div>
+    );
+  }
 
   return (
     <button

@@ -15,6 +15,19 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Loctah API Server',
+    version: '1.0.0',
+    endpoints: {
+      health: '/api/v1/health',
+      api: '/api/v1',
+    },
+  });
+});
+
 // API Routes
 app.use('/api/v1', routes);
 

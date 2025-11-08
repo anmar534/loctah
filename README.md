@@ -11,10 +11,16 @@
 ## 🎯 المميزات
 
 - ✅ مقارنة الأسعار بين المتاجر
-- ✅ دعم كامل للعربية والإنجليزية
+- ✅ دعم كامل للعربية والإنجليزية (RTL/LTR)
 - ✅ عرض المتاجر على الخريطة
 - ✅ نظام المفضلة
-- ✅ لوحة تحكم للإدارة والتجار
+- ✅ لوحة تحكم شاملة للإدارة (100% Complete)
+  - إدارة المتاجر (CRUD + Toggle Status)
+  - إدارة الفئات (Tree View + Nested Categories)
+  - إدارة المنتجات (Multi-image + Specs + SKU)
+  - إدارة العروض (Auto-discount Calculator + Date Pickers)
+  - إدارة المستخدمين (Role/Status Filters + Toggle)
+- ✅ نظام ترجمة متقدم (500+ مفتاح ترجمة)
 
 ## 🛠️ التقنيات المستخدمة
 
@@ -32,7 +38,22 @@
 - React Query
 - Zustand
 - next-intl
-- Mapbox
+- MapLibre GL JS
+
+## 📍 Mapping Library
+
+**MapLibre GL JS** is used instead of Mapbox GL JS for the following reasons:
+- **Open Source**: MapLibre GL JS is fully open-source (BSD-3-Clause license)
+- **No Billing**: Free to use with no per-map-load costs or account requirements
+- **API Compatible**: Drop-in replacement for Mapbox GL JS v1.x with similar API
+- **Community Driven**: Maintained by the MapLibre organization with active community support
+
+MapLibre GL JS can work with various tile providers including:
+- OpenStreetMap-based tiles (Maptiler, Stadia Maps, etc.)
+- Self-hosted tile servers
+- Custom tile sources
+
+For production deployment, configure a tile provider in the environment variables.
 
 ## 🚀 البدء
 
@@ -76,12 +97,26 @@ npm run dev
 
 ## 📁 هيكل المشروع
 
-```
+```text
 loctah/
-├── backend/          # Express + TypeScript API
-├── frontend/         # Next.js Application
-└── docker-compose.yml
+├── backend/              # Express + TypeScript API
+├── frontend/             # Next.js 15 Application
+│   ├── app/             # Next.js App Router
+│   ├── components/      # React Components
+│   ├── lib/             # Utilities & API
+│   └── messages/        # i18n Translations
+├── docker-compose.yml
+├── CLAUDE.md            # Complete Documentation
+└── README.md
 ```
+
+## 📚 التوثيق
+
+للحصول على توثيق شامل حول لوحة التحكم، راجع:
+
+- **[CLAUDE.md](./CLAUDE.md)** - توثيق كامل للـ Admin Panel (100% Complete)
+- **[ADMIN_PANEL_PROGRESS.md](./ADMIN_PANEL_PROGRESS.md)** - سجل التقدم
+- **[FINAL_STRUCTURE_GUIDE.md](./FINAL_STRUCTURE_GUIDE.md)** - دليل البنية النهائية
 
 ## 🔑 الحسابات الافتراضية (بعد التشغيل)
 

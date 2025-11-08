@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import DeleteDialog from '@/components/admin/DeleteDialog';
 import StatusBadge from '@/components/admin/StatusBadge';
 import StoreInfo from '@/components/stores/StoreInfo';
 import { Button } from '@/components/ui/button';
@@ -84,18 +83,9 @@ export default function VerifyStoreClient({ locale, id, store, initialError }: V
         <Button disabled={disableActions} onClick={handleApprove}>
           {approving ? 'Approving…' : 'Approve Store'}
         </Button>
-        <DeleteDialog
-          title="Reject verification"
-          description="Are you sure you want to reject this store verification?"
-          confirmLabel="Reject"
-          submitting={rejecting}
-          trigger={
-            <Button variant="destructive" disabled={disableActions}>
-              {rejecting ? 'Rejecting…' : 'Reject Store'}
-            </Button>
-          }
-          onConfirm={handleReject}
-        />
+        <Button variant="destructive" disabled={disableActions} onClick={handleReject}>
+          {rejecting ? 'Rejecting…' : 'Reject Store'}
+        </Button>
       </div>
 
       <section className="flex flex-col gap-4">

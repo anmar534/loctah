@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(powershell -Command \"New-Item -Path ''c:\\Users\\ammn\\Desktop\\loctah\\frontend\\app\\[locale]\\(admin)\\admin\\offers\\create'' -ItemType Directory -Force\")",
+      "Bash(powershell -Command \"New-Item -Path ''c:\\Users\\ammn\\Desktop\\loctah\\frontend\\app\\[locale]\\(admin)\\admin\\offers\\create\\page.tsx'' -ItemType File -Force\")",
+      "Bash(powershell -Command \"New-Item -Path ''c:\\Users\\ammn\\Desktop\\loctah\\frontend\\app\\[locale]\\(admin)\\admin\\offers\\[id]\\edit'' -ItemType Directory -Force\")",
+      "Bash(powershell -Command \"New-Item -Path ''c:\\Users\\ammn\\Desktop\\loctah\\frontend\\app\\[locale]\\(admin)\\admin\\offers\\[id]\\edit\\page.tsx'' -ItemType File -Force\")",
+      "Bash(ls:*)",
+      "Bash(dir:*)",
+      "Bash(powershell -Command \"if (Test-Path .next) { Remove-Item -Recurse -Force .next; Write-Host ''Cache deleted successfully'' }\")",
+      "Bash(npm uninstall:*)",
+      "Bash(powershell -Command \"if (Test-Path .next) { Remove-Item -Recurse -Force .next; Write-Host ''Cache cleared'' }\")",
+      "Bash(curl:*)",
+      "Bash(python -m json.tool:*)",
+      "Bash(powershell -Command \"New-Item -Path ''c:\\Users\\ammn\\Desktop\\loctah\\frontend\\app\\[locale]\\(admin)\\admin\\categories\\[id]\\edit'' -ItemType Directory -Force\")",
+      "Bash(powershell -Command \"New-Item -Path ''c:\\Users\\ammn\\Desktop\\loctah\\frontend\\app\\[locale]\\(admin)\\admin\\categories\\[id]\\edit\\page.tsx'' -ItemType File -Force\")",
+      "Bash(npm run dev:*)",
+      "Bash(npx prisma generate)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

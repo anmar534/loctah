@@ -5,6 +5,7 @@ import categoriesRoutes from './categories.routes';
 import storesRoutes from './stores.routes';
 import offersRoutes from './offers.routes';
 import favoritesRoutes from './favorites.routes';
+import adminRoutes from './admin.routes';
 
 const router = Router();
 
@@ -15,6 +16,7 @@ router.use('/categories', categoriesRoutes);
 router.use('/stores', storesRoutes);
 router.use('/offers', offersRoutes);
 router.use('/favorites', favoritesRoutes);
+router.use('/admin', adminRoutes);
 
 // Health check
 router.get('/health', (_req, res) => {

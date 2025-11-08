@@ -1,34 +1,53 @@
-import { formatNumber } from '@/lib/utils';
+import { Card } from "@/components/ui/card";
+import { LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-type StatsCardProps = {
+interface StatsCardProps {
   title: string;
-  value: string | number;
-  trend?: 'up' | 'down' | 'neutral';
-};
+  value: number | string;
+  icon: LucideIcon;
+  trend?: number;
+  trendLabel?: string;
+  className?: string;
+}
 
-const trendIcon: Record<NonNullable<StatsCardProps['trend']>, string> = {
-  up: '▲',
-  down: '▼',
-  neutral: '■',
-};
-
-const trendLabel: Record<NonNullable<StatsCardProps['trend']>, string> = {
-  up: 'increasing',
-  down: 'decreasing',
-  neutral: 'no change',
-};
-
-export default function StatsCard({ title, value, trend = 'neutral' }: StatsCardProps) {
-  const displayValue = typeof value === 'number' ? formatNumber(value) : value;
+export default function StatsCard({
+  title,
+  value,
+  icon: Icon,
+  trend,
+  trendLabel,
+  className,
+}: StatsCardProps) {
+  const isPositiveTrend = trend && trend > 0;
+  const isNegativeTrend = trend && trend < 0;
 
   return (
-    <div className="flex flex-col gap-2 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-      <span className="text-sm font-medium text-slate-500">{title}</span>
-      <span className="text-2xl font-semibold text-slate-900">{displayValue}</span>
-      <span className="text-xs text-slate-500">
-        Trend <span aria-hidden="true">{trendIcon[trend]}</span>
-        <span className="sr-only">{trendLabel[trend]}</span>
-      </span>
-    </div>
+    <Card className={cn("p-6", className)}>
+      <div className="flex items-center justify-between">
+        <div className="space-y-1">
+          <p className="text-sm font-medium text-muted-foreground">{title}</p>
+          <p className="text-2xl font-bold">{value}</p>
+          {trend !== undefined && trendLabel && (
+            <div className="flex items-center gap-1 text-xs">
+              <span
+                className={cn(
+                  "font-medium",
+                  isPositiveTrend && "text-green-600",
+                  isNegativeTrend && "text-red-600"
+                )}
+              >
+                {isPositiveTrend && "+"}
+                {trend}%
+              </span>
+              <span className="text-muted-foreground">{trendLabel}</span>
+            </div>
+          )}
+        </div>
+        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+          <Icon className="h-6 w-6 text-primary" />
+        </div>
+      </div>
+    </Card>
   );
 }

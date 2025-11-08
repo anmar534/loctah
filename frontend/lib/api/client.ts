@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001/api/v1';
 
 type RequestOptions = RequestInit & {
   params?: Record<string, string | number | boolean | undefined>;
@@ -29,7 +29,9 @@ export class ApiError extends Error {
  * that don't return data.
  */
 export async function apiFetch<T>(path: string, options: RequestOptions = {}): Promise<T | undefined> {
-  const url = new URL(path, API_BASE_URL);
+  // Ensure proper URL construction by adding trailing slash to base URL if needed
+  const baseUrl = API_BASE_URL.endsWith('/') ? API_BASE_URL : `${API_BASE_URL}/`;
+  const url = new URL(path, baseUrl);
 
   // Extract params and headers from options to process them separately
   const { params, headers: optHeaders, ...rest } = options;

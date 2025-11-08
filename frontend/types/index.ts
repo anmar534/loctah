@@ -74,7 +74,7 @@ export type Store = {
 export type ProductAvailability = 'in-stock' | 'out-of-stock' | 'preorder';
 
 export type ProductImage = {
-  id: string;
+  id?: string;
   url: string;
   alt?: string | null;
   isPrimary?: boolean;
@@ -111,12 +111,18 @@ export type Offer = {
   title: string;
   description: string;
   discount: number;
+  originalPrice?: number;
+  discountedPrice?: number;
   currency?: string;
   startDate: string;
   endDate: string;
   active: boolean;
   productId?: string | null;
   storeId?: string | null;
+  link?: string;
+  affiliateUrl?: string;
+  product?: Pick<Product, 'id' | 'title' | 'slug' | 'image'> | null;
+  store?: Pick<Store, 'id' | 'name' | 'slug'> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -147,6 +153,67 @@ export type DashboardSummary = {
   growthRate: number;
   revenue?: number;
   updatedAt: string;
+};
+
+// Admin API Input Types - Omit server-generated fields for create operations
+export type CreateStoreInput = {
+  slug: string;
+  name: string;
+  address: string;
+  city?: string;
+  country?: string;
+  phone?: string | null;
+  email?: string | null;
+  website?: string | null;
+  status?: StoreStatus;
+  locationDescription?: string | null;
+  coordinates?: Coordinates | null;
+  logoUrl?: string | null;
+  description?: string | null;
+  documents?: StoreDocument[] | null;
+};
+
+export type CreateCategoryInput = {
+  slug: string;
+  name: string;
+  description?: string | null;
+  parentId?: string | null;
+  image?: string | null;
+};
+
+export type CreateProductInput = {
+  slug: string;
+  title: string;
+  name?: string;
+  description: string;
+  shortDescription?: string | null;
+  price?: number | null;
+  currency: string;
+  sku?: string | null;
+  stock: number;
+  availability?: ProductAvailability;
+  brand?: string | null;
+  image?: string | null;
+  images?: ProductImage[];
+  attributes?: Record<string, string | number | boolean | null>;
+  categoryId: string;
+  storeId: string;
+};
+
+export type CreateOfferInput = {
+  title: string;
+  description: string;
+  discount: number;
+  originalPrice?: number;
+  discountedPrice?: number;
+  currency?: string;
+  startDate: string;
+  endDate: string;
+  active?: boolean;
+  productId?: string | null;
+  storeId?: string | null;
+  link?: string;
+  affiliateUrl?: string;
 };
 
 export type LoginCredentials = {

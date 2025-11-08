@@ -1,14 +1,12 @@
-'use client';
-
+import { getTranslations } from "next-intl/server";
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner';
-import { useTranslations } from 'next-intl';
 
-export default function LocaleLoading() {
-  const t = useTranslations('common');
+export default async function LocaleLoading() {
+  const t = await getTranslations("common");
 
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <LoadingSpinner label={t('loadingContent')} />
+      <LoadingSpinner label={t("loading")} />
     </div>
   );
 }
