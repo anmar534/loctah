@@ -16,16 +16,16 @@ export * from './useProducts';
 export * from './useStore';
 export * from './useStores';
 
-// New form hooks (to be created)
-// export * from './useStoreForm';
-// export * from './useProductForm';
-// export * from './useOfferForm';
-// export * from './useCategoryForm';
+// New form hooks
+export * from './useStoreForm';
+export * from './useProductForm';
+export * from './useOfferForm';
+export * from './useCategoryForm';
 
-// New utility hooks (to be created)
-// export * from './useDiscountCalculator';
-// export * from './usePagination';
-// export * from './useConfirm';
-// export * from './useFetch';
-// export * from './useTableActions';
+// New utility hooks
+export * from './useDiscountCalculator';
+export * from './usePagination';
+export * from './useConfirm';
+export * from './useFetch';
+export * from './useTableActions';
 
