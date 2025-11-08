@@ -1,12 +1,10 @@
 /**
  * Categories Components
- * 
+ *
  * UI components for categories management.
  */
 
-// To be created
-// export { CategoriesList } from './CategoriesList';
-// export { CategoryForm } from './CategoryForm';
-// export { CategoryTree } from './CategoryTree';
+// Category components
+export { default as CategoryForm } from './CategoryForm';
 // export { CategorySelector } from './CategorySelector';
 

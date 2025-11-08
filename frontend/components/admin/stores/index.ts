@@ -4,9 +4,8 @@
  * UI components for stores management.
  */
 
-// To be created
-// export { StoresList } from './StoresList';
-// export { StoreForm } from './StoreForm';
-// export { StoreCard } from './StoreCard';
-// export { StoreFilters } from './StoreFilters';
+// Store components
+export { default as StoreForm } from './StoreForm';
+export { default as StoreList } from './StoreList';
+export { default as StoreCard } from './StoreCard';
 
